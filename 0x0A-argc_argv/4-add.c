@@ -4,30 +4,38 @@
 #include <string.h>
 
 /**
- * main -add positive numbers
- * @argc: int
- * @argv: char *
- * Return: always 0
+ * main - Program that adds positive numbers
+ * @argc: - Int of arguments passed into program including command
+ * @argv: - Array of pointers to the strings of arguments passed
+ * Return: 0
  */
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-int i;
-int sum = 0;
+	char *s;
 
-if (argc > 1)
-{
-	for (i = 1; i <= (argc - 1); i++)
+	int i, sum = 0;
+
+	unsigned int j, l;
+
+	for (i = 1; i < argc; i++)
 	{
-		sum = sum + atoi(argv[i]);
+		l = strlen(*(argv + i));
+		s = *(argv + i);
 
+		for (j = 0; j < l; ++j)
+		{
+			if (isdigit(*(s + j)) == 0)
+			{
+				printf("Error\n");
+				return (1);
+			}
+		}
+
+		sum += atoi(*(argv + i));
 	}
+
 	printf("%d\n", sum);
-}
 
-if (argc == 1)
-	printf("0\n");
-
-return (0);
-
+	return (0);
 }
